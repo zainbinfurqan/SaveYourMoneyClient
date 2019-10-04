@@ -1,0 +1,33 @@
+.header{
+    height: 50px;
+    background-color: blueviolet;
+    width: 100%;
+}
+.header_main{
+    margin: 0px ;
+
+}
+.logout-btn{
+    color: white;
+    height: 100%;
+    width: fit-content;
+    margin: 10px 10px ;
+    float: right;
+    cursor: pointer;
+}
+.header-Title{
+    color: white;
+    height: 100%;
+    width: fit-content;
+    margin: 10px 10px ;
+    /* float: right; */
+    cursor: pointer;
+}
+.wellcome-text{
+    width: 79%;
+    float: left;
+    font-size: 18px;
+    color: white;
+    margin: 12px 0px;
+    padding: 0px 7px;
+}
