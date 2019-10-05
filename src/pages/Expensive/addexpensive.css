@@ -38,6 +38,9 @@ select {
   margin-top: 10px;
 
 }
+.expendature-select{
+  margin: 10px 0px;
+}
 .subcard .expendature-name{
     text-align: center;
     height: 60%;

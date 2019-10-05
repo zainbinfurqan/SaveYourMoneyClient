@@ -7,7 +7,7 @@ import "./addexpensive.css";
 import { connect } from "react-redux";
 import { addexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
-import Select from 'react-select';
+import Select from "react-select";
 
 const options = [
   { value: "other", label: "other" },
@@ -232,9 +232,11 @@ function AddExpensive(props) {
     <div className="contaier">
       {/* {console.log(State_.selectOption)} */}
       <Paper className={classes.root}>
-        <p className={classes.close} onClick={clossAddExpendature}>
-          X
-        </p>
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <p className={classes.close} onClick={clossAddExpendature}>
+            X
+          </p>
+        </div>
         {/* <Typography variant="h5" component="h3"> */}
         {/* <h3 className={classes.h2}>Current Date Expensive</h3> */}
         {/* <p className={classes.formtext}>Expendature Name</p> */}
@@ -247,11 +249,14 @@ function AddExpensive(props) {
           autoComplete="current-password"
           margin="normal"
         /> */}
+        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
         <Select
+        className='expendature-select'
           value={State_.selectOption}
           onChange={e => expensiveChangeHandle("selectOption", e)}
           options={options}
         />
+        </div>
         {/* <select
           name="selectOption"
           placeholder="Select Expendature"

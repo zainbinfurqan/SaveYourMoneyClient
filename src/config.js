@@ -3,8 +3,7 @@ let Config = {
     ENVIRONMENT: "LOCAL",
     ENVIRONMENTS: {
       LOCAL: {
-        // API_URL: "http://localhost:4000"
-        API_URL: "https://tranquil-springs-81542.herokuapp.com"
+        API_URL: "http://localhost:4000"
         // BASE_IMG_PATH: ""
       }
       // DEVELOPMENT: {
