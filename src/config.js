@@ -11,7 +11,7 @@ let Config = {
     //     // BASE_IMG_PATH: ""
       },
       DEVELOPMENT: {
-          API_URL: "https://shrouded-savannah-54835.herokuapp.com/",
+          API_URL: "https://shrouded-savannah-54835.herokuapp.com",
           // BASE_IMG_PATH: ""
       },
       // PRODUCTION: {
