@@ -2,6 +2,7 @@ import Config from "../config";
 import { HandleFetchError } from "./ErrorHandlerUtils";
 
 export const FetchUtil = data => {
+  console.log(Config.env().API_URL)
   const { url, method = "GET", token = null, body = null } = data;
   let headers = { "Content-Type": "application/json" };
   if (token) {
