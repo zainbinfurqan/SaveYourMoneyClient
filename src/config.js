@@ -4,8 +4,9 @@ let Config = {
     ENVIRONMENTS: {
       LOCAL: {
         // API_URL: "http://localhost:4000"
+        API_URL: "http://localhost:3000"
         // API_URL: "https://savemoneyserver.herokuapp.com"
-        API_URL: "https://desolate-stream-27036.herokuapp.com"
+        // API_URL: "https://desolate-stream-27036.herokuapp.com"
         // BASE_IMG_PATH: ""
       }
       // DEVELOPMENT: {

@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
   close: {
     float: "left",
-    // cursor: "pointer",
+    fontSize: 22,
     margin: "0",
     width: "fit-content",
     textAlign: "left",
@@ -40,7 +40,8 @@ const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
     backgroundColor: "green",
-    width: 100
+    width: 140,
+    height: 43
   },
   h2: {
     margin:'5px 0px',
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   text: {
-    width: "100%"
+    width: "100%",
   },
   Dialogroot: {
     margin: "8px !important"

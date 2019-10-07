@@ -10,3 +10,7 @@
     margin: 0px;
     height: 100%;
 }
+.MuiFormLabel-root{
+    font-size: 17px !important;
+    margin: -9px 0px 0px 0px;
+}
