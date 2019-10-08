@@ -43,6 +43,7 @@ function CurrentMonthStatus(props) {
   }
 
   useEffect(() => {
+    
     // console.log(props);
     if (props.authData.LoginKeyFlag !== false) {
       let params = {
