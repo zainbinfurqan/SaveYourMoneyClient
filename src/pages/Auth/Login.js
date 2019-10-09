@@ -4,7 +4,14 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import loginicon from "../../image/loginicon.png";
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
 import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 // import { FetchUtil } from "../../utilfunction/FetchUtils.js";
 // import { appendQueryParams } from "../../utilfunction/UrlUtils.js";
 import Swal from "sweetalert2";
@@ -17,7 +24,11 @@ import "./login.css";
 import { connect } from "react-redux";
 import { login } from "../../Redux/acion/LoginAction.js";
 const cryptr = new Cryptr("myTotalySecretKey");
-
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 const useStyles = makeStyles(theme => ({
   root: {
     // padding: theme.spacing(2, 2),
@@ -44,14 +55,14 @@ const useStyles = makeStyles(theme => ({
     height: 43
   },
   h2: {
-    margin:'5px 0px',
+    margin: "5px 0px",
     textAlign: "center"
   },
   btn: {
     textAlign: "center"
   },
   text: {
-    width: "100%",
+    width: "100%"
   },
   Dialogroot: {
     margin: "8px !important"
@@ -65,7 +76,9 @@ function Login(props) {
     email: "",
     password: "",
     open: false,
-    Error_: ""
+    Error_: "",
+    openLoginLoddingPanel: false,
+    loading: false
   });
 
   useEffect(() => {
@@ -95,7 +108,7 @@ function Login(props) {
     let userPassword = cryptr.encrypt(password);
     let loginKey = Math.random() * 10 + 1;
     let loginKey_ = cryptr.encrypt(loginKey);
-
+    setStateValues({ ...State, openLoginLoddingPanel: true, loading: true });
     let params = {
       email,
       userPassword,
@@ -104,9 +117,21 @@ function Login(props) {
     // console.log(props)
     props.login(params).then(res => {
       // console.log(res);
-      Swal.fire(res.msg);
       if (res.msg === "Login Successfully") {
+        setStateValues({
+          ...State,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
+
         props.history.replace("/userhome");
+      } else {
+        setStateValues({
+          ...State,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
+        Swal.fire(res.msg);
       }
     });
     //   console.log(res)
@@ -214,6 +239,24 @@ function Login(props) {
         </p>
         <p style={{ color: "red" }}>{State.Error_}</p>
       </Paper>
+      <Dialog
+        open={State.openLoginLoddingPanel}
+        // onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={150}
+              color={"#123abc"}
+              loading={State.loading}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
     //   </DialogContent>
     // </Dialog>

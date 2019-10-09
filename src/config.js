@@ -1,7 +1,7 @@
 let Config = {
     // PERSIST_SECRET_KEY: "",
     // ENVIRONMENT: "LOCAL",
-    ENVIRONMENT: "LOCAL",
+    ENVIRONMENT: "DEVELOPMENT",
     ENVIRONMENTS: {
       LOCAL: {
         // API_URL: "http://localhost:4000"

@@ -53,9 +53,10 @@ function Header(props) {
       <div className="header">
         {loginFlag && (
           <div>
-          <p onClick={logoutHandle} className="logout-btn">
+          {/* <p onClick={logoutHandle} className="logout-btn">
             LogOut
-          </p>
+          </p> */}
+          <button type="button" class="btn logout-btn"  onClick={logoutHandle}>LogOut</button>
           <p className='wellcome-text'>Welcome</p>
           </div>
         )}
