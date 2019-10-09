@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/core';
 import { getcurrentmonthstatus } from "../../Redux/acion/CurrentMonthStatusAction.js";
 import "./addexpensive.css";
 // import UpdateExpendatureDetails from "./UpdateExpendatureDetails.js";
 import Dialog from "@material-ui/core/Dialog";
+import expendature_icon from "../../image/expens-detail-icon2.png";
 // import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from "@material-ui/core/DialogContent";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { deleteexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
-
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
@@ -24,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     width: "fit-content",
     textAlign: "left",
     fontWeight: 700,
-    cursor: "pointer"
+    fontSize: "19px"
   }
 }));
 
@@ -35,7 +42,8 @@ function ExpendatureDetails(props) {
     StausData: [],
     openUpdate: false,
     deletePanel: false,
-    deleteArray: []
+    deleteArray: [],
+    loading:false
     // TotalMoney: ""
   });
   function getData() {
@@ -43,13 +51,16 @@ function ExpendatureDetails(props) {
       loginKey: props.authData.LoginKey,
       email: props.authData.Email
     };
+    setValues({...State_,loading:true })
+
     props.getcurrentmonthstatus(params).then(res => {
       // console.log(res);
       setValues({
         ...State_,
         deletePanel: false,
         StausData: res[0],
-        TotalMoney: res[1][0].TotalMoney
+        TotalMoney: res[1][0].TotalMoney,
+        loading:false
       });
     });
   }
@@ -109,21 +120,33 @@ function ExpendatureDetails(props) {
   }
 
   return (
-    <div className="container">
+    <div className="container expendature-detail">
       {console.log(State_.deletePanel)}
-      <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12'>
-      <p className={classes.close} onClick={closeExdendDetailHandle}>
-        X
-      </p>
+      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <p className={classes.close} onClick={closeExdendDetailHandle}>
+          X
+        </p>
       </div>
       {/* <h2>Expendature Details</h2> */}
       {/* {console.log(State_.deletePanel)} */}
+      <div style={{margin:'30px 0px'}}>
+      <ClipLoader
+          css={override}
+          sizeUnit={"px"}
+          size={150}
+          color={'#123abc'}
+          loading={State_.loading}
+        />
+        </div>
       {State_.StausData.map(items => {
         return (
           <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 expendature-detail-card-main">
             <div className="subcard">
-              <p className='expendature-name'>{items.ExpendatureName}</p>
-              <p className='expendature-delete-icon'>
+              <div className="expnsive-icon">
+                <img src={expendature_icon} />
+              </div>
+              <p className="expendature-name">{items.ExpendatureName}</p>
+              <p className="expendature-delete-icon">
                 <span
                   class="glyphicon glyphicon-trash"
                   onClick={() => openDeletehandle(items)}

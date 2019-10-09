@@ -72,7 +72,7 @@ function Home(props) {
     } else {
       console.log("ok");
 
-      setStateValue({...State_ ,loginKeyFlag : false});
+      setStateValue({ ...State_, loginKeyFlag: false });
     }
   }, []);
 

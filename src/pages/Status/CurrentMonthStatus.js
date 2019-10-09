@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/core';
 import { getcurrentmonthstatus } from "../../Redux/acion/CurrentMonthStatusAction.js";
 // import { Document, Page, Text, View, StyleSheet } from 'react-pdf';
 import "./currentstatus.css";
@@ -7,7 +9,11 @@ import "./currentstatus.css";
 // import "jspdf-autotable";
 import Pdf from "react-to-pdf";
 import { makeStyles } from "@material-ui/core/styles";
-
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 // const doc = new jsPDF();
 const ref = React.createRef();
 const options = {
@@ -35,7 +41,8 @@ function CurrentMonthStatus(props) {
     StausData: [],
     TotalMoney: "",
     Name: "",
-    Email: ""
+    Email: "",
+    loading:false
   });
 
   function closeStatusHandle() {
@@ -46,6 +53,7 @@ function CurrentMonthStatus(props) {
     
     // console.log(props);
     if (props.authData.LoginKeyFlag !== false) {
+      setValues({...State_,loading:true })
       let params = {
         loginKey: props.authData.LoginKey,
         email: props.authData.Email
@@ -56,7 +64,8 @@ function CurrentMonthStatus(props) {
           ...State_,
           StausData: res[0],
           TotalMoney: res[1][0].TotalMoney,
-          Email: props.authData.Email
+          Email: props.authData.Email,
+          loading:false
         });
       });
     } else {
@@ -78,11 +87,11 @@ function CurrentMonthStatus(props) {
       <div className="container" ref={ref}>
         <div className="pdf-page">
           {/* <h2>Current Month Statement</h2> */}
-          <p className="tag">SaveMoney(..Cash)</p>
+          <h2 className="">E-STATEMENT OF MONTH</h2>
           <div className="profile-detail">
-            <p>
+            {/* <p>
               <span>Name: </span>
-            </p>
+            </p> */}
             <p>
               <span>Email: {State_.Email}</span>
             </p>
@@ -125,13 +134,20 @@ function CurrentMonthStatus(props) {
           margin: "0px 23px 0px 0px"
         }}
       >
-        <Pdf targetRef={ref} options={options} filename="code-example.pdf">
+        <ClipLoader
+          css={override}
+          sizeUnit={"px"}
+          size={150}
+          color={'#123abc'}
+          loading={State_.loading}
+        />
+        {/* <Pdf targetRef={ref} options={options} filename="code-example.pdf">
           {({ toPdf }) => (
             <button className={classes.btn} onClick={toPdf}>
               Generate Pdf
             </button>
           )}
-        </Pdf>
+        </Pdf> */}
       </div>
     </div>
   );

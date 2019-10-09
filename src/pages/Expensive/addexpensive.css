@@ -28,6 +28,12 @@ select {
 }
 .expendature-detail-card-main {
   /* margin: 5px 0px; */
+  padding: 0px 0px;
+ 
+}
+.expendature-detail{
+  padding-right: 3px;
+  padding-left: 3px;
 }
 .subcard {
   width: 95%;
@@ -43,13 +49,22 @@ select {
 }
 .subcard .expendature-name{
     text-align: center;
-    height: 60%;
-    margin: 0px;
-    font-weight: 600;
+    /* height: 60%; */
+    margin: 5px 0px 0px 0px;
+    font-weight: 300;
 }
 .expendature-delete-icon{
     text-align: center;
     font-size: 20px;
+}
+.expnsive-icon{
+  height: 50px;
+  width: 100%;
+}
+.expnsive-icon img{
+  height: 100%;
+  width: 46%;
+  margin: 0% 30%;
 }
 /* 
 .expendature-detail-card-main{

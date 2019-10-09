@@ -16,12 +16,13 @@ const options = [
   { value: 3, label: "Bike Service" },
   { value: 4, label: "Fuel" },
   { value: 5, label: "School Fee" },
-  { value: 6, label: "uition Fee" },
+  { value: 6, label: "Tuition Fee" },
   { value: 7, label: "Kamety" },
   { value: 8, label: "Bike Wash" },
   { value: 9, label: "Car Wash" },
   { value: 10, label: "House Rent" },
-  { value: 11, label: "Home glosry" }
+  { value: 11, label: "Home glosry" },
+  { value: 12, label: "Jym" }
 ];
 
 const useStyles = makeStyles(theme => ({

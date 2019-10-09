@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./userhome.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import currentStatusIcon from '../../image/currentstatus.png'
+import currentStatusIcon from "../../image/currentstatus.png";
 import Paper from "@material-ui/core/Paper";
-import settingicon from '../../image/setting.png'
-import compaericon from '../../image/compaericon.png'
-import selectmonth from '../../image/selectmonth.png'
-import expendaturedetails from '../../image/expendaturedetails.png'
-import addexpendature from '../../image/addexpendature.png'
+import settingicon from "../../image/setting.png";
+import compaericon from "../../image/compaericon.png";
+import selectmonth from "../../image/selectmonth.png";
+import expendaturedetails from "../../image/expendaturedetails.png";
+import addexpendature from "../../image/addexpendature.png";
 import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,20 +39,19 @@ function UserHome(props) {
     props.history.replace("/user/expendaturedetail");
   }
 
-  function openSelectedMonthStatusHandle(){
+  function openSelectedMonthStatusHandle() {
     props.history.replace("/user/selectmonth");
   }
-  function openSettingHandle(){
+  function openSettingHandle() {
     props.history.replace("/user/setting");
-    
   }
 
   useEffect(() => {
     if (props.AuthData.Auth.LoginKeyFlag === _loginKey_) {
+      console.log(props);
       props.history.replace("/home");
-      // console.log(props);
     } else {
-      // console.log(props);
+      console.log(props);
     }
     // console.log(props);
     // if (props.AuthData.Auth.LoginKey.length != "") {
@@ -65,16 +64,16 @@ function UserHome(props) {
     // // return () => {
     // //   console.log(props);
     // // };
-  }, []);
+  });
 
   return (
     props.AuthData.Auth.LoginKeyFlag && (
       <div className="container">
-        {_loginKey_}
+        {console.log(_loginKey_)}
         <Paper className={classes.root} onClick={openMonthStatus}>
           <Typography variant="p" component="p">
             Current Month Status
-            <img src={currentStatusIcon}/>
+            <img src={currentStatusIcon} />
           </Typography>
         </Paper>
         <Paper className={classes.root} onClick={openAddExpendature}>
@@ -92,7 +91,7 @@ function UserHome(props) {
         <Paper className={classes.root} onClick={openExpendatureDetailHandle}>
           <Typography variant="p" component="p">
             Expentature Details
-            <img src={expendaturedetails}/>
+            <img src={expendaturedetails} />
           </Typography>
         </Paper>
         <Paper className={classes.root} onClick={openSelectedMonthStatusHandle}>
@@ -104,7 +103,7 @@ function UserHome(props) {
         <Paper className={classes.root} onClick={openSettingHandle}>
           <Typography variant="p" component="p">
             Setting
-            <img src={settingicon}/>
+            <img src={settingicon} />
           </Typography>
         </Paper>
       </div>

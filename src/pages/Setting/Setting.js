@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
   root: {
     padding: theme.spacing(2, 2),
-    margin: "25px 5px"
+    margin: "20px 5px"
   },
   text: {
     width: "80%"
@@ -127,10 +127,13 @@ function Setting(props) {
   }
 
   return (
-    <div>
-      <p onClick={closeStatusHandle} className={classes.close}>
-        X
-      </p>
+    <div className=''>
+      <div className="close-setting">
+        <p onClick={closeStatusHandle} className={classes.close}>
+          X
+        </p>
+      </div>
+
       {/* <h3 className={classes.h2}>Setting</h3> */}
       <Paper className={classes.root}>
         <Typography variant="p" component="p" className={classes.p}>

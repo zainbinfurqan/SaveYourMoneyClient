@@ -20,7 +20,9 @@
 }
 .profile-detail p{
   font-size: 11px;
-
+}
+.profile-detail{
+  margin: 5px 0px;
 }
 .pdf-page h2{
   font-size: 21px;

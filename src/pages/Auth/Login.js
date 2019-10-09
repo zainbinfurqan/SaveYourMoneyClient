@@ -187,6 +187,7 @@ function Login(props) {
           type="email"
           autoComplete="current-password"
           margin="normal"
+          // placeholder="example@domin.com"
           value={State.email}
           onChange={e => chnageTextHandle("email", e)}
         />

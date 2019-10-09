@@ -43,7 +43,7 @@ function Header(props) {
     });
   }
   function logoutRout() {
-    // console.log(props)
+    console.log(props)
     // props.history.replace("/home");
   }
 
