@@ -5,7 +5,16 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { getselectedmonthstatus } from "../../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
-
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
@@ -34,7 +43,9 @@ function SelecteMonthExpendature(props) {
   let [_States, SetValues] = useState({
     SelectedMonth: "",
     StausData: [],
-    TotalAmmount:''
+    TotalAmmount: "",
+    openLoginLoddingPanel: false,
+    loading: false
   });
 
   function closeSelectedExpendatureHanlde() {
@@ -47,6 +58,8 @@ function SelecteMonthExpendature(props) {
   }
 
   function getSelectedMonthStatus() {
+    SetValues({ ..._States, openLoginLoddingPanel: true, loading: true });
+
     let params = {
       month: _States.SelectedMonth,
       loginKey: props.AuthData.Auth.LoginKey,
@@ -56,8 +69,19 @@ function SelecteMonthExpendature(props) {
       console.log(res);
       if (res[0].length === 0) {
         Swal.fire("No Data Found");
+        SetValues({
+          ..._States,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
       } else {
-        SetValues({ ..._States,StausData:res[0],TotalAmmount:res[1][0].TotalMoney });
+        SetValues({
+          ..._States,
+          StausData: res[0],
+          TotalAmmount: res[1][0].TotalMoney,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
       }
     });
   }
@@ -130,6 +154,28 @@ function SelecteMonthExpendature(props) {
           </tbody>
         </table>
       </div>
+      <Dialog
+        // open={true}
+        open={_States.openLoginLoddingPanel}
+        // onClose={handleClose}
+        className="loder-main"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={150}
+              color={"#123abc"}
+              loading={_States.loading}
+              // loading={true}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+    
     </div>
   );
 }

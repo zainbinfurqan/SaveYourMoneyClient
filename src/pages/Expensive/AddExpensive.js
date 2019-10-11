@@ -8,7 +8,16 @@ import { connect } from "react-redux";
 import { addexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
 import Select from "react-select";
-
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 const options = [
   { value: "other", label: "other" },
   { value: 1, label: "Food" },
@@ -80,7 +89,9 @@ function AddExpensive(props) {
     Money: "",
     expendatureName: "",
     otherExpendatureFalg: false,
-    Error: ""
+    Error: "",
+    openLoginLoddingPanel: false,
+    loading: false
   });
 
   useEffect(() => {
@@ -157,6 +168,7 @@ function AddExpensive(props) {
                 ...State_,
                 Error: ""
               });
+
               let expendatureName_ = expendatureName.trim();
               let params = {
                 selectOption,
@@ -194,6 +206,7 @@ function AddExpensive(props) {
               ...State_,
               Error: ""
             });
+
             let params = {
               selectOption,
               Money,
@@ -212,6 +225,11 @@ function AddExpensive(props) {
     //-----------------
   }
   function add(params) {
+    setStateValues({
+      ...State_,
+      openLoginLoddingPanel: true,
+      loading: true
+    });
     props.addexpendature(params).then(res => {
       // console.log(res);
       if (res[0].msg === "insert Successfully") {
@@ -221,9 +239,19 @@ function AddExpensive(props) {
           selectOption: "",
           Money: "",
           expendatureName: "",
-          otherExpendatureFalg: false
+          otherExpendatureFalg: false,
+          openLoginLoddingPanel: false,
+          loading: false
         });
       } else {
+        setStateValues({
+          selectOption: "",
+          Money: "",
+          expendatureName: "",
+          otherExpendatureFalg: false,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
         Swal.fire(res[0].msg);
       }
     });
@@ -250,13 +278,13 @@ function AddExpensive(props) {
           autoComplete="current-password"
           margin="normal"
         /> */}
-        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-        <Select
-        className='expendature-select'
-          value={State_.selectOption}
-          onChange={e => expensiveChangeHandle("selectOption", e)}
-          options={options}
-        />
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <Select
+            className="expendature-select"
+            value={State_.selectOption}
+            onChange={e => expensiveChangeHandle("selectOption", e)}
+            options={options}
+          />
         </div>
         {/* <select
           name="selectOption"
@@ -325,6 +353,28 @@ function AddExpensive(props) {
         <p>{State_.Error}</p>
         {/* </Typography> */}
       </Paper>
+      <Dialog
+        // open={true}
+        open={State_.openLoginLoddingPanel}
+        // onClose={handleClose}
+        className="loder-main"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={150}
+              color={"#123abc"}
+              loading={State_.loading}
+              // loading={true}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+    
     </div>
   );
 }

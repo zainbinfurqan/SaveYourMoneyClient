@@ -8,10 +8,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 // import { FetchUtil } from "../../utilfunction/FetchUtils.js";
 // import { appendQueryParams } from "../../utilfunction/UrlUtils.js";
 import Swal from "sweetalert2";
@@ -240,8 +238,10 @@ function Login(props) {
         <p style={{ color: "red" }}>{State.Error_}</p>
       </Paper>
       <Dialog
+        // open={true}
         open={State.openLoginLoddingPanel}
         // onClose={handleClose}
+        className='loder-main'
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -253,10 +253,12 @@ function Login(props) {
               size={150}
               color={"#123abc"}
               loading={State.loading}
+              // loading={true}
             />
           </DialogContentText>
         </DialogContent>
       </Dialog>
+    
     </div>
     //   </DialogContent>
     // </Dialog>

@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import ClipLoader from 'react-spinners/ClipLoader';
-import { css } from '@emotion/core';
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
 import { getcurrentmonthstatus } from "../../Redux/acion/CurrentMonthStatusAction.js";
 import "./addexpensive.css";
 // import UpdateExpendatureDetails from "./UpdateExpendatureDetails.js";
-import Dialog from "@material-ui/core/Dialog";
 import expendature_icon from "../../image/expens-detail-icon2.png";
 // import DialogActions from '@material-ui/core/DialogActions';
+import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { deleteexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
+
 const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
+  display: block;
+  margin: 0 auto;
+  border-color: red;
 `;
 const useStyles = makeStyles(theme => ({
   button: {
@@ -43,7 +45,9 @@ function ExpendatureDetails(props) {
     openUpdate: false,
     deletePanel: false,
     deleteArray: [],
-    loading:false
+    loading: false,
+    openLoginLoddingPanel: false,
+    loading: false
     // TotalMoney: ""
   });
   function getData() {
@@ -51,16 +55,19 @@ function ExpendatureDetails(props) {
       loginKey: props.authData.LoginKey,
       email: props.authData.Email
     };
-    setValues({...State_,loading:true })
+    setValues({ ...State_, loading: true });
+    setValues({ ...State_, openLoginLoddingPanel: true, loading: true });
 
     props.getcurrentmonthstatus(params).then(res => {
-      // console.log(res);
+      console.log(res);
       setValues({
         ...State_,
         deletePanel: false,
         StausData: res[0],
         TotalMoney: res[1][0].TotalMoney,
-        loading:false
+        loading: false,
+        openLoginLoddingPanel: false,
+        loading: false
       });
     });
   }
@@ -103,7 +110,9 @@ function ExpendatureDetails(props) {
 
   function deleteHandle() {
     let array_obj = State_.deleteArray;
-    console.log(props);
+    setValues({ ...State_, openLoginLoddingPanel: true, loading: true });
+
+    // console.log(props);
     let params = {
       array_obj,
       loginKey: props.authData.LoginKey,
@@ -111,7 +120,13 @@ function ExpendatureDetails(props) {
     };
     props.deleteexpendature(params).then(res => {
       // console.log(res);
-      setValues({ ...State_, deletePanel: false, deleteArray: "" });
+      setValues({
+        ...State_,
+        deletePanel: false,
+        deleteArray: "",
+        openLoginLoddingPanel: false,
+        loading: false
+      });
       // setTimeout(() => {
       Swal.fire(res[0].msg);
       getData();
@@ -129,15 +144,15 @@ function ExpendatureDetails(props) {
       </div>
       {/* <h2>Expendature Details</h2> */}
       {/* {console.log(State_.deletePanel)} */}
-      <div style={{margin:'30px 0px'}}>
-      <ClipLoader
+      {/* <div style={{ margin: "30px 0px" }}>
+        <ClipLoader
           css={override}
           sizeUnit={"px"}
           size={150}
-          color={'#123abc'}
+          color={"#123abc"}
           loading={State_.loading}
         />
-        </div>
+      </div> */}
       {State_.StausData.map(items => {
         return (
           <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 expendature-detail-card-main">
@@ -261,6 +276,28 @@ function ExpendatureDetails(props) {
           </div>
         </DialogContent>
       </Dialog>
+      <Dialog
+        // open={true}
+        open={State_.openLoginLoddingPanel}
+        // onClose={handleClose}
+        className="loder-main"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={150}
+              color={"#123abc"}
+              loading={State_.loading}
+              // loading={true}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
+    
     </div>
   );
 }

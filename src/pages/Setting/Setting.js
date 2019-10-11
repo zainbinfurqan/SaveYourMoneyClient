@@ -10,10 +10,22 @@ import TextField from "@material-ui/core/TextField";
 import Swal from "sweetalert2";
 import Cryptr from "cryptr";
 import Select from "react-select";
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import { logout } from "../../Redux/acion/LoginAction.js";
+
 import {
   userdelete,
   changepasswordafterlogin
 } from "../../Redux/acion/LoginAction.js";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 const cryptr = new Cryptr("myTotalySecretKey");
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +70,9 @@ function Setting(props) {
   const [States_, setStates] = useState({
     email: "",
     oldpassword: "",
-    newpassowrd: ""
+    newpassowrd: "",
+    openLoginLoddingPanel: false,
+    loading: false
   });
   useEffect(() => {
     console.log(props);
@@ -107,6 +121,8 @@ function Setting(props) {
   }
 
   function changePasswordHandle() {
+    setStates({ ...States_, openLoginLoddingPanel: true, loading: true });
+
     let { email, oldpassword, newpassowrd } = States_;
     let oldpassword_ = cryptr.encrypt(oldpassword);
     let newpassowrd_ = cryptr.encrypt(newpassowrd);
@@ -119,15 +135,32 @@ function Setting(props) {
     props.changepasswordafterlogin(params).then(res => {
       console.log(res);
       if (res.msg === "change successfull") {
-        props.history.replace("/login");
+        setStates({
+          ...States_,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
+        let params = {
+          loginKey: props.authData.LoginKey
+        };
+        props.logout(params).then(() => {
+          // console.log(props)
+          props.history.replace("/login");
+          // props.history.replace("/home");
+        });
       } else {
         Swal.fire(res.msg);
+        setStates({
+          ...States_,
+          openLoginLoddingPanel: false,
+          loading: false
+        });
       }
     });
   }
 
   return (
-    <div className=''>
+    <div className="">
       <div className="close-setting">
         <p onClick={closeStatusHandle} className={classes.close}>
           X
@@ -209,6 +242,27 @@ function Setting(props) {
           </Typography>
         </Paper>
       )}
+      <Dialog
+        // open={true}
+        open={States_.openLoginLoddingPanel}
+        // onClose={handleClose}
+        className="loder-main"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={150}
+              color={"#123abc"}
+              loading={States_.loading}
+              // loading={true}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
@@ -221,7 +275,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     userdelete: data => dispatch(userdelete(data)),
-    changepasswordafterlogin: data => dispatch(changepasswordafterlogin(data))
+    changepasswordafterlogin: data => dispatch(changepasswordafterlogin(data)),
+    logout: data => dispatch(logout(data))
   };
 };
 

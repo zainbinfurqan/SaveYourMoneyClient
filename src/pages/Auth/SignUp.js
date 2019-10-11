@@ -5,13 +5,23 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { FetchUtil } from "../../utilfunction/FetchUtils.js";
-import signup from '../../image/signup.png'
+import signup from "../../image/signup.png";
 import { appendQueryParams } from "../../utilfunction/UrlUtils.js";
 import Swal from "sweetalert2";
 import Cryptr from "cryptr";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import ClipLoader from "react-spinners/ClipLoader";
+import { css } from "@emotion/core";
 // import DialogContent from "@material-ui/core/DialogContent";
 // import Dialog from "@material-ui/core/Dialog";
 import "./signup.css";
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 const cryptr = new Cryptr("myTotalySecretKey");
 
 const useStyles = makeStyles(theme => ({
@@ -40,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     height: 43
   },
   h2: {
-    margin:'5px 0px',
+    margin: "5px 0px",
     textAlign: "center"
   },
   text: {
@@ -59,7 +69,9 @@ export default function SignUp(props) {
     userEmail: "",
     userPassword: "",
     open: false,
-    Error: ""
+    Error: "",
+    openLoginLoddingPanel: false,
+    loading: false
   });
 
   function closeSignUpHandle() {
@@ -78,6 +90,7 @@ export default function SignUp(props) {
 
   function registerHandleBtn() {
     let { userName, userEmail, userPassword } = State;
+    setStates({ ...State, openLoginLoddingPanel: true, loading: true });
 
     // function emailIsValid(userEmail) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -113,6 +126,12 @@ export default function SignUp(props) {
               .then(res => {
                 Swal.fire(res[0].msg);
                 if (res[0].msg !== "Alreay Exist") {
+                  setStates({
+                    ...State,
+                    openLoginLoddingPanel: false,
+                    loading: false
+                  });
+
                   setStates({ userName: "", userEmail: "", password: "" });
                   props.history.replace("/login");
                 }
@@ -203,6 +222,27 @@ export default function SignUp(props) {
         </p>
         <p>{State.Error}</p>
       </Paper>
+      <Dialog
+        // open={true}
+        open={State.openLoginLoddingPanel}
+        // onClose={handleClose}
+        className="loder-main"
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={150}
+              color={"#123abc"}
+              loading={State.loading}
+              // loading={true}
+            />
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </div>
     //   </DialogContent>
     // </Dialog>
