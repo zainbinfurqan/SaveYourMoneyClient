@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { addexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
 import Select from "react-select";
+import Loader from '../Loader/Loader.js'
+
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
 import Dialog from "@material-ui/core/Dialog";
@@ -353,7 +355,9 @@ function AddExpensive(props) {
         <p>{State_.Error}</p>
         {/* </Typography> */}
       </Paper>
-      <Dialog
+      <Loader openLoaderPanel={State_.openLoginLoddingPanel} openLoader={State_.loading} />
+
+      {/* <Dialog
         // open={true}
         open={State_.openLoginLoddingPanel}
         // onClose={handleClose}
@@ -374,7 +378,7 @@ function AddExpensive(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    
+     */}
     </div>
   );
 }

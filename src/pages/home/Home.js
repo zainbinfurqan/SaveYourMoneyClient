@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { connect } from "react-redux";
+import Loader from '../Loader/Loader.js'
 
 // import Typography from "@material-ui/core/Typography";
 // import CardActions from '@material-ui/core/CardActions';
@@ -113,6 +114,7 @@ function Home(props) {
           </CardContent>
         </Card>
       )}
+      {/* <Loader openLoaderPanel={true} openLoader={true} /> */}
       {/* {State_.openLoginFlag && (
         <Login open={State_.openLoginFlag} close={close} />
       )}

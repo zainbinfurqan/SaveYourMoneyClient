@@ -10,6 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Loader from '../Loader/Loader.js'
 // import { FetchUtil } from "../../utilfunction/FetchUtils.js";
 // import { appendQueryParams } from "../../utilfunction/UrlUtils.js";
 import Swal from "sweetalert2";
@@ -237,7 +238,9 @@ function Login(props) {
         </p>
         <p style={{ color: "red" }}>{State.Error_}</p>
       </Paper>
-      <Dialog
+      <Loader openLoaderPanel={State.openLoginLoddingPanel} openLoader={State.loading} />
+
+      {/* <Dialog
         // open={true}
         open={State.openLoginLoddingPanel}
         // onClose={handleClose}
@@ -258,7 +261,7 @@ function Login(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    
+     */}
     </div>
     //   </DialogContent>
     // </Dialog>

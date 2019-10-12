@@ -14,6 +14,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
+import Loader from '../Loader/Loader.js'
+
 // import DialogContent from "@material-ui/core/DialogContent";
 // import Dialog from "@material-ui/core/Dialog";
 import "./signup.css";
@@ -222,7 +224,9 @@ export default function SignUp(props) {
         </p>
         <p>{State.Error}</p>
       </Paper>
-      <Dialog
+      <Loader openLoaderPanel={State.openLoginLoddingPanel} openLoader={State.loading} />
+
+      {/* <Dialog
         // open={true}
         open={State.openLoginLoddingPanel}
         // onClose={handleClose}
@@ -243,7 +247,8 @@ export default function SignUp(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    </div>
+    */}
+   </div>
     //   </DialogContent>
     // </Dialog>
   );

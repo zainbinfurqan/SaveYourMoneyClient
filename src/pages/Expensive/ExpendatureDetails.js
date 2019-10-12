@@ -4,8 +4,10 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
 import { getcurrentmonthstatus } from "../../Redux/acion/CurrentMonthStatusAction.js";
 import "./addexpensive.css";
+import Loader from "../Loader/Loader.js";
+import back_icon from '../../image/back-icon.png'
 // import UpdateExpendatureDetails from "./UpdateExpendatureDetails.js";
-import expendature_icon from "../../image/expens-detail-icon2.png";
+import expendature_icon from "../../image/expens-detail-icon.png";
 // import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -33,7 +35,8 @@ const useStyles = makeStyles(theme => ({
     width: "fit-content",
     textAlign: "left",
     fontWeight: 700,
-    fontSize: "19px"
+    fontSize: "19px",
+    marginTop: '8px'
   }
 }));
 
@@ -139,7 +142,7 @@ function ExpendatureDetails(props) {
       {console.log(State_.deletePanel)}
       <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <p className={classes.close} onClick={closeExdendDetailHandle}>
-          X
+          <img src={back_icon} />
         </p>
       </div>
       {/* <h2>Expendature Details</h2> */}
@@ -155,12 +158,19 @@ function ExpendatureDetails(props) {
       </div> */}
       {State_.StausData.map(items => {
         return (
-          <div className="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 expendature-detail-card-main">
+          <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 expendature-detail-card-main">
             <div className="subcard">
               <div className="expnsive-icon">
                 <img src={expendature_icon} />
               </div>
-              <p className="expendature-name">{items.ExpendatureName}</p>
+              {/* <p className="expendature-name">{ items.ExpendatureName}</p> */}
+              <p className="expendature-name">
+                {items.ExpendatureName.length >= 7
+                  // ? items.ExpendatureName
+                  ? `${items.ExpendatureName.substr(0,5)}...`
+                  : items.ExpendatureName}
+                  {/* : (undefined)} */}
+              </p>
               <p className="expendature-delete-icon">
                 <span
                   class="glyphicon glyphicon-trash"
@@ -276,7 +286,12 @@ function ExpendatureDetails(props) {
           </div>
         </DialogContent>
       </Dialog>
-      <Dialog
+      <Loader
+        openLoaderPanel={State_.openLoginLoddingPanel}
+        openLoader={State_.loading}
+      />
+
+      {/* <Dialog
         // open={true}
         open={State_.openLoginLoddingPanel}
         // onClose={handleClose}
@@ -297,7 +312,7 @@ function ExpendatureDetails(props) {
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    
+     */}
     </div>
   );
 }
