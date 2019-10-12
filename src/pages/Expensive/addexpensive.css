@@ -19,7 +19,7 @@ select {
   height: 45px;
 }
 .glyphicon-trash {
-  color: red;
+  /* color: red; */
   /* margin: 0px 0px 0px 0px; */
 }
 .glyphicon-edit {
@@ -55,14 +55,23 @@ select {
   text-align: center;
   font-size: 20px;
   width: 50%;
+  color: #9a9c9c;
   float: left;
+}
+.expendature-delete-icon :hover{
+  color: red;
+
 }
 .expendature-view-icon {
   text-align: center;
   font-size: 20px;
   width: 50%;
   float: right;
+  color: #9a9c9c;
+}
+.expendature-view-icon :hover{
   color: green;
+
 }
 .expnsive-icon {
   height: 40px;
