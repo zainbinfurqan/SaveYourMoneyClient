@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
 import Dialog from "@material-ui/core/Dialog";
+import back_icon from '../../../image/back-icon.png'
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 const override = css`
@@ -28,7 +29,9 @@ const useStyles = makeStyles(theme => ({
     width: "fit-content",
     textAlign: "left",
     fontWeight: 700,
-    cursor: "pointer"
+    cursor: "pointer",
+    marginTop: '8px',
+    marginBottom: '6px'
   },
   button: {
     margin: theme.spacing(1),
@@ -88,7 +91,9 @@ function SelecteMonthExpendature(props) {
   return (
     <div className="container">
       <p className={classes.close} onClick={closeSelectedExpendatureHanlde}>
-        X
+        {/* X */}
+        <img src={back_icon} />
+
       </p>
       <select
         name="selectOption"

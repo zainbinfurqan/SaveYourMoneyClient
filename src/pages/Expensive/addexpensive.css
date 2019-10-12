@@ -29,9 +29,8 @@ select {
 .expendature-detail-card-main {
   /* margin: 5px 0px; */
   padding: 0px 0px;
- 
 }
-.expendature-detail{
+.expendature-detail {
   padding-right: 3px;
   padding-left: 3px;
 }
@@ -42,26 +41,34 @@ select {
   height: 90px;
   margin: auto;
   margin-top: 10px;
-
 }
-.expendature-select{
+.expendature-select {
   margin: 10px 0px;
 }
-.subcard .expendature-name{
-    text-align: center;
-    /* height: 60%; */
-    margin: 0px 0px 0px 0px;
-    font-weight: 300;
+.subcard .expendature-name {
+  text-align: center;
+  /* height: 60%; */
+  margin: 0px 0px 0px 0px;
+  font-weight: 300;
 }
-.expendature-delete-icon{
-    text-align: center;
-    font-size: 20px;
+.expendature-delete-icon {
+  text-align: center;
+  font-size: 20px;
+  width: 50%;
+  float: left;
 }
-.expnsive-icon{
+.expendature-view-icon {
+  text-align: center;
+  font-size: 20px;
+  width: 50%;
+  float: right;
+  color: green;
+}
+.expnsive-icon {
   height: 40px;
   width: 100%;
 }
-.expnsive-icon img{
+.expnsive-icon img {
   height: 100%;
   width: 40%;
   margin: 0% 30%;

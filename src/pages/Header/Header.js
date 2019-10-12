@@ -23,23 +23,27 @@ function Header(props) {
   });
 
   useEffect(() => {
-    console.log(window.innerWidth);
     window.addEventListener("resize", () => {
-      console.log(window.innerWidth);
+      
       if (window.innerWidth > 768) {
-        setOpen((open = true));
+      console.log(window.innerWidth);
+
+        setOpen({open : true});
       } else {
         setOpen((open = false));
       }
     });
-
+  });
+  useEffect(() => {
     if (props.AuthData.Auth.LoginKey !== "") {
+      console.log("ok");
+
       setFlag((loginFlag = true));
     } else {
-      // console.log("ok");
+      console.log("ok");
       setFlag((loginFlag = false));
     }
-  });
+  }, []);
 
   function logoutHandle() {
     setState_({ ...Stats_, openLoginLoddingPanel: true, loading: true });
@@ -62,7 +66,7 @@ function Header(props) {
 
   return (
     <div className="row header_main">
-      {/* {console.log(loginFlag)} */}
+      {console.log(open)}
       <div className="header">
         {loginFlag && (
           <div>
@@ -72,7 +76,7 @@ function Header(props) {
             <button type="button" class="btn logout-btn" onClick={logoutHandle}>
               LogOut
             </button>
-            <p className="wellcome-text">Welcome</p>
+            {/* <p className="wellcome-text">Welcome</p> */}
           </div>
         )}
         {!loginFlag && <p className="header-Title">SaveMoney</p>}

@@ -8,6 +8,8 @@ import "./currentstatus.css";
 // import jsPDF from "jspdf";
 // import "jspdf-autotable";
 import Pdf from "react-to-pdf";
+import back_icon from '../../image/back-icon.png'
+
 import { makeStyles } from "@material-ui/core/styles";
 const override = css`
     display: block;
@@ -83,7 +85,11 @@ function CurrentMonthStatus(props) {
   return (
     <div className="row currentStatus">
       {console.log(State_.Email)}
-      <p onClick={closeStatusHandle}>X</p>
+      <p onClick={closeStatusHandle}>
+        {/* X */}
+        <img src={back_icon} />
+
+        </p>
       <div className="container" ref={ref}>
         <div className="pdf-page">
           {/* <h2>Current Month Statement</h2> */}

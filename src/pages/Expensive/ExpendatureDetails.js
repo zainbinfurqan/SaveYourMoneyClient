@@ -5,7 +5,7 @@ import { css } from "@emotion/core";
 import { getcurrentmonthstatus } from "../../Redux/acion/CurrentMonthStatusAction.js";
 import "./addexpensive.css";
 import Loader from "../Loader/Loader.js";
-import back_icon from '../../image/back-icon.png'
+import back_icon from "../../image/back-icon.png";
 // import UpdateExpendatureDetails from "./UpdateExpendatureDetails.js";
 import expendature_icon from "../../image/expens-detail-icon.png";
 // import DialogActions from '@material-ui/core/DialogActions';
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "left",
     fontWeight: 700,
     fontSize: "19px",
-    marginTop: '8px'
+    marginTop: "8px"
   }
 }));
 
@@ -50,7 +50,8 @@ function ExpendatureDetails(props) {
     deleteArray: [],
     loading: false,
     openLoginLoddingPanel: false,
-    loading: false
+    loading: false,
+    View: false
     // TotalMoney: ""
   });
   function getData() {
@@ -98,13 +99,21 @@ function ExpendatureDetails(props) {
   }
 
   function openDeletehandle(values) {
-    // console.log(values);
+    console.log(values);
 
     setValues({ ...State_, deletePanel: true, deleteArray: values });
   }
 
   function cancleDeleteHandle() {
-    setValues({ ...State_, deletePanel: false });
+    setValues({ ...State_, deletePanel: false,View:false });
+  }
+  function openViewhandle(values, flage) {
+    setValues({
+      ...State_,
+      deletePanel: true,
+      deleteArray: values,
+      View: flage
+    });
   }
 
   function closeExdendDetailHandle() {
@@ -166,15 +175,21 @@ function ExpendatureDetails(props) {
               {/* <p className="expendature-name">{ items.ExpendatureName}</p> */}
               <p className="expendature-name">
                 {items.ExpendatureName.length >= 7
-                  // ? items.ExpendatureName
-                  ? `${items.ExpendatureName.substr(0,5)}...`
+                  ? // ? items.ExpendatureName
+                    `${items.ExpendatureName.substr(0, 5)}...`
                   : items.ExpendatureName}
-                  {/* : (undefined)} */}
+                {/* : (undefined)} */}
               </p>
               <p className="expendature-delete-icon">
                 <span
-                  class="glyphicon glyphicon-trash"
+                  className="glyphicon glyphicon-trash"
                   onClick={() => openDeletehandle(items)}
+                ></span>
+              </p>
+              <p className="expendature-view-icon">
+                <span
+                  className="glyphicon glyphicon-eye-open"
+                  onClick={() => openViewhandle(items, true)}
                 ></span>
               </p>
             </div>
@@ -249,11 +264,15 @@ function ExpendatureDetails(props) {
           <div className="update-subdiv">
             {/* {console.log(State_.deleteArray)} */}
             <p>
-              <span>Expendature Name :</span>
+              <span>Expendature Name : </span>
               {State_.deleteArray.ExpendatureName}
             </p>
             <p>
-              <span>Money :</span>
+              <span>Date : </span>
+              {State_.deleteArray.Date} {State_.deleteArray.Month} {State_.deleteArray.Year}
+            </p>
+            <p>
+              <span>Money : </span>
               {State_.deleteArray.Money}
             </p>
             {/* {State_.deleteArray.map(items_1 => {
@@ -266,22 +285,26 @@ function ExpendatureDetails(props) {
             })} */}
             <p>You Sure You Want To Delete This Entry </p>
           </div>
+
           <div>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={deleteHandle}
-            >
-              Delete
-            </Button>
+            {!State_.View && (
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={deleteHandle}
+              >
+                Delete
+              </Button>
+            )}
+
             <Button
               variant="contained"
               color="primary"
               className={classes.button}
               onClick={cancleDeleteHandle}
             >
-              CanCle
+              cancle
             </Button>
           </div>
         </DialogContent>
