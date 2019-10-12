@@ -14,7 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
-import Loader from '../Loader/Loader.js'
+import Loader from "../Loader/Loader.js";
 
 // import DialogContent from "@material-ui/core/DialogContent";
 // import Dialog from "@material-ui/core/Dialog";
@@ -92,7 +92,6 @@ export default function SignUp(props) {
 
   function registerHandleBtn() {
     let { userName, userEmail, userPassword } = State;
-    setStates({ ...State, openLoginLoddingPanel: true, loading: true });
 
     // function emailIsValid(userEmail) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -107,6 +106,8 @@ export default function SignUp(props) {
           setStates({ ...State, Error: "password must be 8 characters" });
         } else {
           setStates({ ...State, Error: "" });
+          setStates({ ...State, openLoginLoddingPanel: true, loading: true });
+
           let password = cryptr.encrypt(userPassword);
           let params = {
             userName,
@@ -224,7 +225,10 @@ export default function SignUp(props) {
         </p>
         <p>{State.Error}</p>
       </Paper>
-      <Loader openLoaderPanel={State.openLoginLoddingPanel} openLoader={State.loading} />
+      <Loader
+        openLoaderPanel={State.openLoginLoddingPanel}
+        openLoader={State.loading}
+      />
 
       {/* <Dialog
         // open={true}
@@ -248,7 +252,7 @@ export default function SignUp(props) {
         </DialogContent>
       </Dialog>
     */}
-   </div>
+    </div>
     //   </DialogContent>
     // </Dialog>
   );

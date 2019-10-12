@@ -36,14 +36,14 @@ function Header(props) {
   });
   useEffect(() => {
     if (props.AuthData.Auth.LoginKey !== "") {
-      console.log("ok");
+      // console.log("ok");
 
       setFlag((loginFlag = true));
     } else {
-      console.log("ok");
+      // console.log("ok");
       setFlag((loginFlag = false));
     }
-  }, []);
+  });
 
   function logoutHandle() {
     setState_({ ...Stats_, openLoginLoddingPanel: true, loading: true });
