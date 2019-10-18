@@ -3,3 +3,6 @@ img{
     margin: 0px;
     height: 20px;
 }
+.disable{
+    opacity: 0.5;
+}

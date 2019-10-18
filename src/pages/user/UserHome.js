@@ -82,7 +82,7 @@ function UserHome(props) {
             <img src={addexpendature} />
           </Typography>
         </Paper>
-        <Paper className={classes.root}>
+        <Paper className={`${classes.root} disable`}>
           <Typography variant="p" component="p">
             Comparision
             <img src={compaericon} />
