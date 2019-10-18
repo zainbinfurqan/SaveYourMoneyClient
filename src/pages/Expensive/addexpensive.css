@@ -19,7 +19,11 @@ select {
   height: 45px;
 }
 .glyphicon-trash {
+<<<<<<< HEAD
   color: red;
+=======
+  /* color: red; */
+>>>>>>> 693c3355c4e5840f57c079eb8f40513bed2d7439
   /* margin: 0px 0px 0px 0px; */
 }
 .glyphicon-edit {
@@ -55,14 +59,32 @@ select {
   text-align: center;
   font-size: 20px;
   width: 50%;
+<<<<<<< HEAD
   float: left;
 }
+=======
+  color: #9a9c9c;
+  float: left;
+}
+.expendature-delete-icon :hover{
+  color: red;
+
+}
+>>>>>>> 693c3355c4e5840f57c079eb8f40513bed2d7439
 .expendature-view-icon {
   text-align: center;
   font-size: 20px;
   width: 50%;
   float: right;
+<<<<<<< HEAD
   color: green;
+=======
+  color: #9a9c9c;
+}
+.expendature-view-icon :hover{
+  color: green;
+
+>>>>>>> 693c3355c4e5840f57c079eb8f40513bed2d7439
 }
 .expnsive-icon {
   height: 40px;

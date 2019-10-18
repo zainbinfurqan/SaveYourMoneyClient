@@ -25,15 +25,22 @@
     cursor: pointer;
 }
 .wellcome-text{
+<<<<<<< HEAD
     width: fit-content;
+=======
+    width: 65%;
+>>>>>>> 693c3355c4e5840f57c079eb8f40513bed2d7439
     float: left;
     font-size: 18px;
     color: white;
     margin: 12px 0px;
     padding: 0px 7px;
+<<<<<<< HEAD
 }
 .porfile-logo{
     float: left;
     height: 40px;
     margin: 5px 5px
+=======
+>>>>>>> 693c3355c4e5840f57c079eb8f40513bed2d7439
 }
