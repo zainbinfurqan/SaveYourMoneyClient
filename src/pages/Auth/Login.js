@@ -61,7 +61,9 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   text: {
-    width: "100%"
+    width: "100%",
+    // margin: '-5px 0px',
+    fontSize: '23px !important'
   },
   Dialogroot: {
     margin: "8px !important"
@@ -204,7 +206,7 @@ function Login(props) {
         </div>
         <h3 className={classes.h2}>Login </h3>
         <TextField
-          className={classes.text}
+          className={`${classes.text} textbox`}
           // id="standard-password-input"
           label="Email"
           // className={classes.textField}

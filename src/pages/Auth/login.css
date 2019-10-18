@@ -20,3 +20,9 @@ box-shadow: 0px 0px 0px 0px !important;
 .loder-main .MuiPaper-root{
     background-color: transparent;
 }
+.textbox .MuiInput-input{
+    font-size: 22px;
+}
+.textbox .MuiFormLabel-root{
+    margin: 3px 0px;
+}
