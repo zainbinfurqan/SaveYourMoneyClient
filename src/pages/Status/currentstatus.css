@@ -1,0 +1,43 @@
+.currentStatus {
+  margin: 0px;
+}
+.statusTable {
+  width: 100%;
+  font-size: 11px;
+  /* margin: 0px 5px; */
+}
+.statusTable thead {
+  font-family: -webkit-body;
+  background-color: #c280ff;
+  color: white;
+}
+.totalmoney-tr{
+  font-weight: 700;
+}
+.pdf-page{
+  width: 90%;
+    margin: auto;
+}
+.profile-detail p{
+  font-size: 11px;
+}
+.profile-detail{
+  margin: 5px 0px;
+}
+.pdf-page h2{
+  font-size: 21px;
+    text-align: center;
+    margin: 0px;
+
+}
+.pdf-page .tag{
+  text-align: right;
+    margin: 0px;
+    font-size: 11px;
+}
+.currentStatus p{
+  font-weight: 700;
+    width: fit-content;
+    margin: 0px;
+    padding: 3px 12px;
+}

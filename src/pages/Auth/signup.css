@@ -1,0 +1,13 @@
+.MuiDialog-paper{
+    margin: 10px !important
+}
+
+.signup-icon{
+    height: 34px;
+    width: 15%;
+    margin: auto;
+}
+.signup-icon img{
+    margin: 0px;
+    height: 100%;
+}
