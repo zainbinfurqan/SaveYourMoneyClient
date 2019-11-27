@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from "./App";
+import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
+import WithLoginHeader from './pages/Header/WithLoginHeader.js'
+import WithLogoutHeader from './pages/Header/WithlogoutHeader'
 import Home from "./pages/home/Home.js";
+import WebHome from './pages/WebHome/WebHome.js'
 import UserHome from "./pages/user/UserHome.js";
 import AddExpensive from "./pages/Expensive/AddExpensive.js";
 import Login from "./pages/Auth/Login.js";
@@ -17,6 +20,7 @@ import Header from './pages/Header/Header.js'
 import ExpendatureDetails from './pages/Expensive/ExpendatureDetails.js'
 import Setting from './pages/Setting/Setting.js'
 import SelecteMonthExpendature from './pages/Expensive/SelectedMonthExpendature/SelecteMonthExpendature.js'
+import PDFgenerate from './pages/PFDgenerate'
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 // import App from './App.js';
@@ -40,7 +44,9 @@ function Routing(){
     return (
       <Router>
         <Header/>
+        {/* <Route exact path="/" component={WebHome} /> */}
         <Route exact path="/" component={Home} />
+        {/* <Route exact path="/webhome" component={WebHome} /> */}
         <Route exact path="/home" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
@@ -50,6 +56,7 @@ function Routing(){
         <Route exact path="/user/expendaturedetail" component={ExpendatureDetails} />
         <Route exact path="/user/selectmonth" component={SelecteMonthExpendature} />
         <Route exact path="/user/setting" component={Setting} />
+        <Route exact path="/user/PDFgenerate" component={PDFgenerate} />
         
       </Router>
     );

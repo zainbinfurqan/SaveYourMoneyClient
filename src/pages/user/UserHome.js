@@ -45,6 +45,10 @@ function UserHome(props) {
   function openSettingHandle() {
     props.history.replace("/user/setting");
   }
+  function openPDFgenerateHandle (){
+    props.history.replace("/user/PDFgenerate");
+
+  }
 
   useEffect(() => {
     if (props.AuthData.Auth.LoginKeyFlag === _loginKey_) {
@@ -68,44 +72,58 @@ function UserHome(props) {
 
   return (
     props.AuthData.Auth.LoginKeyFlag && (
-      <div className="container">
-        {console.log(_loginKey_)}
-        <Paper className={classes.root} onClick={openMonthStatus}>
-          <Typography variant="p" component="p">
-            Current Month Status
+      <div className="">
+        {/* <Header/> */}
+        <div className='container'>
+          {console.log(_loginKey_)}
+          <Paper className={classes.root} onClick={openMonthStatus}>
+            <Typography variant="p" component="p">
+              Current Month Status
             <img src={currentStatusIcon} />
-          </Typography>
-        </Paper>
-        <Paper className={classes.root} onClick={openAddExpendature}>
-          <Typography variant="p" component="p">
-            Add Expensive
+            </Typography>
+          </Paper>
+          <Paper className={classes.root} onClick={openAddExpendature}>
+            <Typography variant="p" component="p">
+              Add Expensive
             <img src={addexpendature} />
-          </Typography>
-        </Paper>
-        <Paper className={`${classes.root} disable`}>
-          <Typography variant="p" component="p">
-            Comparision
+            </Typography>
+          </Paper>
+          <Paper className={`${classes.root} disable`}>
+            <Typography variant="p" component="p">
+              Comparision
             <img src={compaericon} />
-          </Typography>
-        </Paper>
-        <Paper className={classes.root} onClick={openExpendatureDetailHandle}>
-          <Typography variant="p" component="p">
-            Expentature Details
+            </Typography>
+          </Paper>
+          <Paper className={classes.root} onClick={openExpendatureDetailHandle}>
+            <Typography variant="p" component="p">
+              Expentature Details
             <img src={expendaturedetails} />
-          </Typography>
-        </Paper>
-        <Paper className={classes.root} onClick={openSelectedMonthStatusHandle}>
-          <Typography variant="p" component="p">
-            Selected Month Status
+            </Typography>
+          </Paper>
+          <Paper className={classes.root} onClick={openPDFgenerateHandle}>
+            <Typography variant="p" component="p">
+              Generate Report
+              <i className='fa fa-file-pdf' style={{
+                float: 'right',
+                margin: '0px',
+                height: '20px',
+              }} />
+              {/* <img src={expendaturedetails} /> */}
+            </Typography>
+          </Paper>
+          <Paper className={classes.root} onClick={openSelectedMonthStatusHandle}>
+            <Typography variant="p" component="p">
+              Selected Month Status
             <img src={selectmonth} />
-          </Typography>
-        </Paper>
-        <Paper className={classes.root} onClick={openSettingHandle}>
-          <Typography variant="p" component="p">
-            Setting
+            </Typography>
+          </Paper>
+          <Paper className={classes.root} onClick={openSettingHandle}>
+            <Typography variant="p" component="p">
+              Setting
             <img src={settingicon} />
-          </Typography>
-        </Paper>
+            </Typography>
+          </Paper>
+        </div>
       </div>
     )
   );

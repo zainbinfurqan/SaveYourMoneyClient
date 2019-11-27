@@ -1,0 +1,72 @@
+.Webhome-container{
+ margin: 0px;   
+}
+.intro-main{
+    width: 100%;
+    text-align: center;
+
+}
+.intro-main img{
+    height: 60px;
+    float: none;
+    /* margin: auto; */
+    margin-bottom: 40px;
+}
+.intro-sub-main{
+    width: 100%;
+    height: 300px;
+}
+.into-sub-left{
+    width: 50%;
+    background-color: aquamarine;
+    float: left;
+    height: 300px;
+}
+.into-sub-right{
+    width: 50%;
+    float: right;
+    background-color: aquamarine;
+    height: 300px;
+}
+.info-tabs img{
+    float: left;
+    margin: 0px 5px;
+}
+.info-tabs{
+    width: 100%;
+    height: auto;
+    padding: 0px 10px;
+    margin-top: -40px;
+}
+.info-tabs p{ 
+    width: fit-content;
+    float: left;
+}
+.header{
+    height: 50px;
+    width: 100%;
+    background-color: blueviolet;
+}
+.header-sub{
+    height: 100%;
+    float: right;
+    width: 90px;
+}
+.header-sub .loginbtn{
+ width: 100%;
+ color: white;
+ height: 100%;   
+}
+.header-sub .menu{
+    color: white;
+    font-weight: 700;
+    height: 100%;
+    margin: 0px;
+    text-align: center;
+    padding: 13px 0px;
+    width: fit-content;
+}
+.header-sub img{
+    height: 40px;
+    margin: 5px 4px;
+}

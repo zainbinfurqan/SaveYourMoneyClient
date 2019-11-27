@@ -73,6 +73,9 @@ select {
   color: green;
 
 }
+.container{
+  padding: 0px;
+}
 .expnsive-icon {
   height: 40px;
   width: 100%;

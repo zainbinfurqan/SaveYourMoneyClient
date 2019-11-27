@@ -11,6 +11,7 @@ import Dialog from "@material-ui/core/Dialog";
 import back_icon from '../../../image/back-icon.png'
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Header from '../../Header/Header.js'
 const override = css`
   display: block;
   margin: 0 auto;
@@ -89,75 +90,80 @@ function SelecteMonthExpendature(props) {
     });
   }
   return (
-    <div className="container">
-      <p className={classes.close} onClick={closeSelectedExpendatureHanlde}>
-        {/* X */}
-        <img src={back_icon} />
-
-      </p>
-      <select
-        name="selectOption"
-        placeholder="Select Expendature"
-        onChange={e => selectMnthHandle("selectOption", e)}
-      >
-        <option
-          value=""
-          disabled={true}
-          selected={true}
-          style={{ color: "white" }}
+    <div className="">
+      <div style={{ height: '40px', padding: '5px', width: 'fit-content' }} onClick={closeSelectedExpendatureHanlde}>
+        <i className="fas fa-caret-left" style={{ float: 'left', margin: '0px 0px 0px 5px', fontSize: '23px' }} />
+        <p style={{ width: 'fit-content', margin: '1px', float: 'left', fontSize: '15px' }}>Back</p>
+      </div>
+      {/* <p className={`close-tab`} onClick={closeSelectedExpendatureHanlde}>
+        Back
+          <img src={back_icon} />
+      </p> */}
+      <div className='container'>
+        <select
+          name="selectOption"
+          placeholder="Select Expendature"
+          onChange={e => selectMnthHandle("selectOption", e)}
         >
-          Select Month
+          <option
+            value=""
+            disabled={true}
+            selected={true}
+            style={{ color: "white" }}
+          >
+            Select Month
         </option>
-        <option value="1">January</option>
-        <option value="2">February</option>
-        <option value="3">March</option>
-        <option value="4">April</option>
-        <option value="5">May</option>
-        <option value="6">June</option>
-        <option value="7">July</option>
-        <option value="8">August</option>
-        <option value="9">September</option>
-        <option value="10">October</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-      </select>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
 
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={getSelectedMonthStatus}
-      >
-        Fetch Data
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={getSelectedMonthStatus}
+        >
+          Fetch Data
       </Button>
-      <div>
-        <table className="statusTable table-striped">
-          <thead>
-            <tr>
-              <td>Expendature Name</td>
-              <td>Expendature</td>
-              <td>Date</td>
-            </tr>
-          </thead>
-          <tbody>
-            {_States.StausData.map(items => {
-              return (
-                <tr>
-                  <td>{items.ExpendatureName}</td>
-                  <td>
-                    {items.Date}-{items.Month}-{items.Year}
-                  </td>
-                  <td>{items.Money}</td>
-                </tr>
-              );
-            })}
-            <tr className="totalmoney-tr">
-              <td>Total</td>
-              <td></td>
-              <td>{_States.TotalAmmount}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div>
+          <table className="statusTable table-striped">
+            <thead>
+              <tr>
+                <td>Expendature Name</td>
+                <td>Expendature</td>
+                <td>Date</td>
+              </tr>
+            </thead>
+            <tbody>
+              {_States.StausData.map(items => {
+                return (
+                  <tr>
+                    <td>{items.ExpendatureName}</td>
+                    <td>
+                      {items.Date}-{items.Month}-{items.Year}
+                    </td>
+                    <td>{items.Money}</td>
+                  </tr>
+                );
+              })}
+              <tr className="totalmoney-tr">
+                <td>Total</td>
+                <td></td>
+                <td>{_States.TotalAmmount}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <Dialog
         // open={true}
@@ -175,12 +181,12 @@ function SelecteMonthExpendature(props) {
               size={150}
               color={"#123abc"}
               loading={_States.loading}
-              // loading={true}
+            // loading={true}
             />
           </DialogContentText>
         </DialogContent>
       </Dialog>
-    
+
     </div>
   );
 }

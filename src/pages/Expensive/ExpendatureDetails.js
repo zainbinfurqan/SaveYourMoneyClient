@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { deleteexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
-
+import Header from '../Header/Header'
 const override = css`
   display: block;
   margin: 0 auto;
@@ -51,7 +51,8 @@ function ExpendatureDetails(props) {
     loading: false,
     openLoginLoddingPanel: false,
     loading: false,
-    View: false
+    View: false,
+    delete: false,
     // TotalMoney: ""
   });
   function getData() {
@@ -67,8 +68,8 @@ function ExpendatureDetails(props) {
       setValues({
         ...State_,
         deletePanel: false,
-        StausData: res[0],
-        TotalMoney: res[1][0].TotalMoney,
+        StausData: res,
+        // TotalMoney: res[1][0].TotalMoney,
         loading: false,
         openLoginLoddingPanel: false,
         loading: false
@@ -101,11 +102,11 @@ function ExpendatureDetails(props) {
   function openDeletehandle(values) {
     console.log(values);
 
-    setValues({ ...State_, deletePanel: true, deleteArray: values });
+    setValues({ ...State_, deletePanel: true, deleteArray: values, delete: true });
   }
 
   function cancleDeleteHandle() {
-    setValues({ ...State_, deletePanel: false,View:false });
+    setValues({ ...State_, deletePanel: false, View: false, delete: false });
   }
   function openViewhandle(values, flage) {
     setValues({
@@ -147,55 +148,74 @@ function ExpendatureDetails(props) {
   }
 
   return (
-    <div className="container expendature-detail">
+    <div className="">
+      {/* <Header/> */}
       {console.log(State_.deletePanel)}
-      <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <p className={classes.close} onClick={closeExdendDetailHandle}>
-          <img src={back_icon} />
-        </p>
+      <div style={{ height: '40px', padding: '5px', width: 'fit-content' }} onClick={closeExdendDetailHandle}>
+        <i className="fas fa-caret-left" style={{ float: 'left', margin: '0px 0px 0px 5px', fontSize: '23px' }} />
+        <p style={{ width: 'fit-content', margin: '1px', float: 'left', fontSize: '15px' }}>Back</p>
       </div>
-      {/* <h2>Expendature Details</h2> */}
-      {/* {console.log(State_.deletePanel)} */}
-      {/* <div style={{ margin: "30px 0px" }}>
-        <ClipLoader
-          css={override}
-          sizeUnit={"px"}
-          size={150}
-          color={"#123abc"}
-          loading={State_.loading}
-        />
-      </div> */}
-      {State_.StausData.map(items => {
-        return (
-          <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 expendature-detail-card-main">
-            <div className="subcard">
-              <div className="expnsive-icon">
-                <img src={expendature_icon} />
+      <div className='expendature-detail'>
+        {State_.StausData.map(items => {
+          return (
+            <>
+              <div className="d-flex alert alert-primary p-0  border border-secondary rounded h-75 d-inline-block my-3">
+                <div className='mr-auto p-2 align-self-start h-75'>
+                  <p className="expendature-name">
+                    {items.ExpendatureName.length >= 15
+                      ? // ? items.ExpendatureName
+                      `${items.ExpendatureName.substr(0, 5)}... ${items.Date}`
+                      : (`${items.ExpendatureName} (${items.Date} ${items.Month} ${items.Year})`)
+                    }
+                  </p>
+                </div>
+                <div className=' d-flex p-2 w-25 align-self-end h-75'>
+                  <div className="p-2">
+                    <span
+                      className="glyphicon glyphicon-trash"
+                      onClick={() => openDeletehandle(items, true)}
+                    ></span>
+                  </div>
+                  <div className="p-2">
+                    <span
+                      className="glyphicon glyphicon-eye-open"
+                      onClick={() => openViewhandle(items, true)}
+                    ></span>
+                  </div>
+                </div>
               </div>
-              {/* <p className="expendature-name">{ items.ExpendatureName}</p> */}
-              <p className="expendature-name">
-                {items.ExpendatureName.length >= 7
-                  ? // ? items.ExpendatureName
-                    `${items.ExpendatureName.substr(0, 5)}...`
-                  : items.ExpendatureName}
-                {/* : (undefined)} */}
-              </p>
-              <p className="expendature-delete-icon">
-                <span
-                  className="glyphicon glyphicon-trash"
-                  onClick={() => openDeletehandle(items)}
-                ></span>
-              </p>
-              <p className="expendature-view-icon">
-                <span
-                  className="glyphicon glyphicon-eye-open"
-                  onClick={() => openViewhandle(items, true)}
-                ></span>
-              </p>
-            </div>
-          </div>
-        );
-      })}
+            </>
+            // <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 expendature-detail-card-main">
+            //   <div className="subcard">
+            //     <div className="expnsive-icon">
+            //       <img src={expendature_icon} />
+            //     </div>
+            //     {/* <p className="expendature-name">{ items.ExpendatureName}</p> */}
+            //     <p className="expendature-name">
+            //       {items.ExpendatureName.length >= 7
+            //         ? // ? items.ExpendatureName
+            //         `${items.ExpendatureName.substr(0, 5)}...`
+            //         : items.ExpendatureName}
+            //       {/* : (undefined)} */}
+            //     </p>
+            //     <p className="expendature-delete-icon">
+            //       <span
+            //         className="glyphicon glyphicon-trash"
+            //         onClick={() => openDeletehandle(items,true)}
+            //       ></span>
+            //     </p>
+            //     <p className="expendature-view-icon">
+            //       <span
+            //         className="glyphicon glyphicon-eye-open"
+            //         onClick={() => openViewhandle(items, true)}
+            //       ></span>
+            //     </p>
+            //   </div>
+            // </div>
+
+          );
+        })}
+      </div>
       {/* {State_.StausData.map(items => {
         return (
           <div className="expendature-detail-card-main">
@@ -287,7 +307,7 @@ function ExpendatureDetails(props) {
           </div>
 
           <div>
-            {!State_.View && (
+            {State_.delete && (
               <Button
                 variant="contained"
                 color="primary"

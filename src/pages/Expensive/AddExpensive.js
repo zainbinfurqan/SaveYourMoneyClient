@@ -9,7 +9,7 @@ import { addexpendature } from "../../Redux/acion/ExpendatureAction.js";
 import Swal from "sweetalert2";
 import Select from "react-select";
 import Loader from '../Loader/Loader.js'
-
+import Header from '../Header/Header'
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
 import Dialog from "@material-ui/core/Dialog";
@@ -260,14 +260,19 @@ function AddExpensive(props) {
   }
 
   return (
-    <div className="contaier">
+    <div className="">
+      {/* <Header/> */}
       {/* {console.log(State_.selectOption)} */}
+      <div style={{ height: '40px', padding: '5px', width: 'fit-content' }} onClick={clossAddExpendature}>
+        <i className="fas fa-caret-left" style={{ float: 'left', margin: '0px 0px 0px 5px', fontSize: '23px' }} />
+        <p style={{ width: 'fit-content',  margin: '1px',float: 'left', fontSize: '15px' }}>Back</p>
+      </div>
       <Paper className={classes.root}>
-        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        {/* <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <p className={classes.close} onClick={clossAddExpendature}>
             X
           </p>
-        </div>
+        </div> */}
         {/* <Typography variant="h5" component="h3"> */}
         {/* <h3 className={classes.h2}>Current Date Expensive</h3> */}
         {/* <p className={classes.formtext}>Expendature Name</p> */}

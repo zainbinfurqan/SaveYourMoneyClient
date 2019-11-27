@@ -8,7 +8,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import ClipLoader from "react-spinners/ClipLoader";
 import profil_icon from '../../image/profile-icon.jpg'
+
 import { css } from "@emotion/core";
+import NetConnection from '../../utilfunction/NetConnection.js'
 import "./header.css";
 const override = css`
   display: block;
@@ -24,7 +26,10 @@ function Header(props) {
   });
 
   useEffect(() => {
+console.log(props)
+    console.log(NetConnection())
     window.addEventListener("resize", () => {
+      // console.log(window.addEventListener('online', this.handleConnectionChange));
 
       if (window.innerWidth > 768) {
         console.log(window.innerWidth);
@@ -58,6 +63,12 @@ function Header(props) {
       // props.history.replace("/home");
     });
   }
+
+  function loginHandle(){
+    console.log(props)
+    // props.history.replace('/home');
+  }
+
   function logoutRout() {
     console.log(props);
     setState_({ ...Stats_, openLoginLoddingPanel: false, loading: false });
@@ -77,11 +88,16 @@ function Header(props) {
             <button type="button" class="btn logout-btn" onClick={logoutHandle}>
               LogOut
             </button>
-            <img src={profil_icon} className='porfile-logo'/>
+            <img src={profil_icon} className='porfile-logo' />
             <p className="wellcome-text">{props.AuthData.Auth.userName}</p>
           </div>
         )}
-        {!loginFlag && <p className="header-Title">SaveMoney</p>}
+        {!loginFlag && <p className="header-Title">
+          <p>Save Ur Money</p>
+        {/* <button type="button" class="btn login-btn" onClick={loginHandle}>
+         Login
+          </button> */}
+        </p>}
       </div>
       <Dialog
         open={open}

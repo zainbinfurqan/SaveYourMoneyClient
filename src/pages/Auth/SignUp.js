@@ -137,6 +137,13 @@ export default function SignUp(props) {
 
                   setStates({ userName: "", userEmail: "", password: "" });
                   props.history.replace("/login");
+                } else {
+                  Swal.fire(res[0].msg);
+                  setStates({
+                    ...State,
+                    openLoginLoddingPanel: false,
+                    loading: false
+                  });
                 }
               })
               .catch(err => {

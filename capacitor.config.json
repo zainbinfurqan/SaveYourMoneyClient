@@ -1,0 +1,7 @@
+{
+  "appId": "com.SaveUrMoney.app",
+  "appName": "SaveUrMoney",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build"
+}

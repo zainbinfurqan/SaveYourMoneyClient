@@ -35,9 +35,16 @@
     margin: 0px;
     font-size: 11px;
 }
-.currentStatus p{
+
+.close-tab{
   font-weight: 700;
-    width: fit-content;
+    /* width: fit-content; */
+    width: 100%;
+    height: 35px;
+    background-color: aliceblue;
     margin: 0px;
-    padding: 3px 12px;
+    padding: 8px 12px;
+}
+.close-tab img{
+  float: left;
 }

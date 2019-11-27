@@ -9,7 +9,7 @@ import "./currentstatus.css";
 // import "jspdf-autotable";
 import Pdf from "react-to-pdf";
 import back_icon from '../../image/back-icon.png'
-
+import Header from '../Header/Header.js'
 import { makeStyles } from "@material-ui/core/styles";
 const override = css`
     display: block;
@@ -44,7 +44,7 @@ function CurrentMonthStatus(props) {
     TotalMoney: "",
     Name: "",
     Email: "",
-    loading:false
+    loading: false
   });
 
   function closeStatusHandle() {
@@ -65,10 +65,10 @@ function CurrentMonthStatus(props) {
     };
   });
   useEffect(() => {
-    
+
     // console.log(props);
     if (props.authData.LoginKeyFlag !== false) {
-      setValues({...State_,loading:true })
+      setValues({ ...State_, loading: true })
       let params = {
         loginKey: props.authData.LoginKey,
         email: props.authData.Email
@@ -80,7 +80,7 @@ function CurrentMonthStatus(props) {
           StausData: res[0],
           TotalMoney: res[1][0].TotalMoney,
           Email: props.authData.Email,
-          loading:false
+          loading: false
         });
       });
     } else {
@@ -88,7 +88,7 @@ function CurrentMonthStatus(props) {
     }
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   // function downloadPDF() {
   //   console.log("download");
   //   doc.autoTable({ html: "#my-table" });
@@ -96,13 +96,16 @@ function CurrentMonthStatus(props) {
   // }
 
   return (
-    <div className="row currentStatus">
-      {console.log(State_.Email)}
-      <p onClick={closeStatusHandle}>
-        {/* X */}
-        <img src={back_icon} />
-
-        </p>
+    <div className="currentStatus">
+      {/* {console.log(State_.Email)} */}
+      {/* <Header/> */}
+      {/* <p className={`close-tab`} onClick={closeStatusHandle}> */}
+      <div style={{height:'40px',padding:'5px',width:'fit-content'}} onClick={closeStatusHandle}>
+        <i className="fas fa-caret-left"  style={{float:'left',margin:'0px 0px 0px 5px', fontSize: '23px' }} />
+        <p style={{width:'fit-content', margin: '1px',float:'left',fontSize:'15px'}}>Back</p>
+      </div>
+          {/* <img src={back_icon} /> */}
+      {/* </p> */}
       <div className="container" ref={ref}>
         <div className="pdf-page">
           {/* <h2>Current Month Statement</h2> */}
@@ -142,7 +145,7 @@ function CurrentMonthStatus(props) {
               </tr>
             </tbody>
           </table>
-      
+
         </div>
         {/* <p onClick={downloadPDF}>Download PDF</p> */}
       </div>

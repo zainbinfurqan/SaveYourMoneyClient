@@ -3,3 +3,15 @@
     padding: 8px 5px;
     font-size: 17px;
 }
+.close-tab{
+    font-weight: 700;
+      /* width: fit-content; */
+      width: 100%;
+      height: 35px;
+      background-color: aliceblue;
+      margin: 0px;
+      padding: 8px 12px;
+  }
+  .close-tab img{
+    float: left;
+  }

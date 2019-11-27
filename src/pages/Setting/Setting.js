@@ -16,7 +16,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import { logout } from "../../Redux/acion/LoginAction.js";
-
+import back_icon from "../../image/back-icon.png";
+import Header from '../Header/Header'
 import {
   userdelete,
   changepasswordafterlogin
@@ -54,14 +55,7 @@ const useStyles = makeStyles(theme => ({
   p: {
     textAlign: "center"
   },
-  close: {
-    float: "left",
-    cursor: "pointer",
-    margin: "0px 0px 0px 10px",
-    width: "fit-content",
-    textAlign: "left",
-    fontWeight: 700
-  }
+
 }));
 
 function Setting(props) {
@@ -80,7 +74,7 @@ function Setting(props) {
     } else {
       props.history.replace("/home");
     }
-    return () => {};
+    return () => { };
   });
   const toggleChecked = () => {
     setChecked(prev => !prev);
@@ -161,11 +155,17 @@ function Setting(props) {
 
   return (
     <div className="">
-      <div className="close-setting">
-        <p onClick={closeStatusHandle} className={classes.close}>
-          X
-        </p>
+      {/* <div className="close-setting"> */}
+      {/* <Header/> */}
+      <div style={{ height: '40px', padding: '5px', width: 'fit-content' }} onClick={closeStatusHandle}>
+        <i className="fas fa-caret-left" style={{ float: 'left', margin: '0px 0px 0px 5px', fontSize: '23px' }} />
+        <p style={{ width: 'fit-content', margin: '1px', float: 'left', fontSize: '15px' }}>Back</p>
       </div>
+      {/* <p className={`${classes.close} close-tab`} onClick={closeStatusHandle}>
+          Back
+          <img src={back_icon} />
+        </p> */}
+      {/* </div> */}
 
       {/* <h3 className={classes.h2}>Setting</h3> */}
       <Paper className={classes.root}>
@@ -258,7 +258,7 @@ function Setting(props) {
               size={150}
               color={"#123abc"}
               loading={States_.loading}
-              // loading={true}
+            // loading={true}
             />
           </DialogContentText>
         </DialogContent>
