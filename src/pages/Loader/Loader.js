@@ -26,13 +26,11 @@ function Loader(props) {
           setStates({ openLoginLoddingPanel: true, loading: true });
       }
     }
-  });
+  }, [props.openLoaderPanel, props.openLoader, States_.openLoginLoddingPanel, States_.loading]);
 
   return (
     <Dialog
-      // open={true}
       open={States_.openLoginLoddingPanel}
-      // onClose={handleClose}
       className="loder-main"
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"

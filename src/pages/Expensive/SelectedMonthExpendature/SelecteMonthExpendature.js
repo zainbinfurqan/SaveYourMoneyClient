@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./SelecteMonthExpendature.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,21 +8,16 @@ import Swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/core";
 import Dialog from "@material-ui/core/Dialog";
-import back_icon from '../../../image/back-icon.png'
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import Header from '../../Header/Header.js'
+import ProgressBar from '../../../component/progressbar/ProgressBar'
 const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
 const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1),
-    backgroundColor: "green",
-    width: 100
-  },
+
   close: {
     float: "left",
     cursor: "pointer",
@@ -49,45 +44,51 @@ function SelecteMonthExpendature(props) {
     StausData: [],
     TotalAmmount: "",
     openLoginLoddingPanel: false,
-    loading: false
+    loading: false,
+    barData: []
   });
+
+  useEffect(() => {
+    if (props.AuthData.Auth.LoginKeyFlag !== false) {
+    } else {
+      props.history.replace("/home");
+    }
+  }, [props]);
 
   function closeSelectedExpendatureHanlde() {
     props.history.replace("/userhome");
   }
 
   function selectMnthHandle(key, e) {
-    console.log(key, e);
     SetValues({ ..._States, SelectedMonth: e.target.value });
   }
 
   function getSelectedMonthStatus() {
-    SetValues({ ..._States, openLoginLoddingPanel: true, loading: true });
+    if (_States.SelectedMonth) {
+      SetValues({ ..._States, openLoginLoddingPanel: true, loading: true });
+      let params = {
+        month: _States.SelectedMonth,
+        loginKey: props.AuthData.Auth.LoginKey,
+        Email: props.AuthData.Auth.Email
+      };
+      props.getselectedmonthstatus(params).then(res => {
+        if (res.status) {
+          SetValues({
+            ..._States,
+            // StausData: res[0],
+            TotalAmmount: res[1][0].TotalMoney,
+            openLoginLoddingPanel: false,
+            loading: false,
+            barData: res[2]
+          });
+        } else {
+          Swal.fire("no data found")
+          SetValues({ ..._States, openLoginLoddingPanel: false, TotalAmmount: 0, barData: [], loading: false });
 
-    let params = {
-      month: _States.SelectedMonth,
-      loginKey: props.AuthData.Auth.LoginKey,
-      Email: props.AuthData.Auth.Email
-    };
-    props.getselectedmonthstatus(params).then(res => {
-      console.log(res);
-      if (res[0].length === 0) {
-        Swal.fire("No Data Found");
-        SetValues({
-          ..._States,
-          openLoginLoddingPanel: false,
-          loading: false
-        });
-      } else {
-        SetValues({
-          ..._States,
-          StausData: res[0],
-          TotalAmmount: res[1][0].TotalMoney,
-          openLoginLoddingPanel: false,
-          loading: false
-        });
-      }
-    });
+        }
+      });
+    }
+
   }
   return (
     <div className="">
@@ -95,10 +96,7 @@ function SelecteMonthExpendature(props) {
         <i className="fas fa-caret-left" style={{ float: 'left', margin: '0px 0px 0px 5px', fontSize: '23px' }} />
         <p style={{ width: 'fit-content', margin: '1px', float: 'left', fontSize: '15px' }}>Back</p>
       </div>
-      {/* <p className={`close-tab`} onClick={closeSelectedExpendatureHanlde}>
-        Back
-          <img src={back_icon} />
-      </p> */}
+
       <div className='container'>
         <select
           name="selectOption"
@@ -109,7 +107,7 @@ function SelecteMonthExpendature(props) {
             value=""
             disabled={true}
             selected={true}
-            style={{ color: "white" }}
+            style={{ color: "black", backgroundColor: '#fdfdfd' }}
           >
             Select Month
         </option>
@@ -135,7 +133,8 @@ function SelecteMonthExpendature(props) {
         >
           Fetch Data
       </Button>
-        <div>
+
+        {/* <div>
           <table className="statusTable table-striped">
             <thead>
               <tr>
@@ -163,12 +162,27 @@ function SelecteMonthExpendature(props) {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
+      </div>
+      <div style={{ margin: '0px 5px 0px 5px' }}>
+        <p style={{
+          margin: 'auto',
+          textAlign: 'center'
+        }}>Total Ammount: <span style={{
+          fontWeight: 700
+        }}>{_States.TotalAmmount}</span></p>
+        {_States.barData.map((itm, ind) => {
+          return (
+            <div style={{
+              marginTop: '10px'
+            }}>
+              <ProgressBar total={_States.TotalAmmount} spend={itm} ind={ind} />
+            </div>
+          )
+        })}
       </div>
       <Dialog
-        // open={true}
         open={_States.openLoginLoddingPanel}
-        // onClose={handleClose}
         className="loder-main"
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -181,7 +195,6 @@ function SelecteMonthExpendature(props) {
               size={150}
               color={"#123abc"}
               loading={_States.loading}
-            // loading={true}
             />
           </DialogContentText>
         </DialogContent>

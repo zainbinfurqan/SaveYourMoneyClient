@@ -5,7 +5,6 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
 export const login = params => dispatch => {
-  console.log(params);
   return new Promise((resolve, reject) => {
     FetchUtil({
       url: appendQueryParams(`/user/login`),
@@ -18,15 +17,12 @@ export const login = params => dispatch => {
       }
     })
       .then(res => {
-        console.log(res.msg);
-
         resolve(res);
         if (res.msg.msg === "Login Successfully") {
           let abc = {
             name: res.msg.name,
             params
           }
-          // console.log("login")
           dispatch({ type: LOGIN, payload: abc });
         } else {
           dispatch({ type: LOGIN });
@@ -40,7 +36,6 @@ export const login = params => dispatch => {
 
 
 export const logout = params => dispatch => {
-  console.log(params);
   return new Promise((resolve, reject) => {
     FetchUtil({
       url: appendQueryParams(`/user/logout?LoginKey=${params.loginKey}`),
@@ -53,16 +48,12 @@ export const logout = params => dispatch => {
       }
     })
       .then(res => {
-        // console.log(res, "add Deparments action response");
 
         resolve(res);
-        // console.log(res)
         if (res[0].msg === "Logout") {
-          // console.log("abc")
           let key = "destroy";
           dispatch({ type: LOGOUT, payload: key });
         } else {
-          // console.log("xyz")
           dispatch({ type: LOGOUT });
         }
       })
@@ -73,7 +64,6 @@ export const logout = params => dispatch => {
 };
 
 export const userdelete = params => dispatch => {
-  console.log(params);
   return new Promise((resolve, reject) => {
     FetchUtil({
       url: appendQueryParams(`/user/deleteuser`),
@@ -86,7 +76,6 @@ export const userdelete = params => dispatch => {
       }
     })
       .then(res => {
-        // console.log(res);
 
         resolve(res);
         dispatch({ type: LOGOUT });
@@ -98,7 +87,6 @@ export const userdelete = params => dispatch => {
 };
 
 export const changepasswordafterlogin = params => dispatch => {
-  console.log(params);
   return new Promise((resolve, reject) => {
     FetchUtil({
       url: appendQueryParams(`/user/changepasswordafterlogin`),
@@ -111,10 +99,8 @@ export const changepasswordafterlogin = params => dispatch => {
       }
     })
       .then(res => {
-        // console.log(res);
 
         resolve(res);
-        // dispatch({ type: LOGOUT });
       })
       .catch(err => {
         reject({ message: err });

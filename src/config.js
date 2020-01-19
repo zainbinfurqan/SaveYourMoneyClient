@@ -4,7 +4,7 @@ let Config = {
     ENVIRONMENT: "DEVELOPMENT",
     ENVIRONMENTS: {
       LOCAL: {
-        // API_URL: "http://localhost:3001"
+        API_URL: "http://localhost:3001"
         // API_URL: "http://localhost:3000"
         // API_URL: "https://shrouded-savannah-54835.herokuapp.com/"
     //     // API_URL: "https://desolate-stream-27036.herokuapp.com"

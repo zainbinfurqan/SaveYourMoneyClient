@@ -18,14 +18,8 @@ const useStyles = makeStyles(theme => ({
 }));
 function UserHome(props) {
   const classes = useStyles();
-  let [_loginKey_, setLoginKey] = useState(false);
+  let [_loginKey_] = useState(false);
 
-  // if (props.AuthData.Auth.LoginKeyFlag === _loginKey_) {
-  //   props.history.replace("/home");
-  //   console.log(props);
-  // } else {
-  //   console.log(props);
-  // }
 
   function openAddExpendature() {
     props.history.replace("/addexpensive");
@@ -45,62 +39,45 @@ function UserHome(props) {
   function openSettingHandle() {
     props.history.replace("/user/setting");
   }
-  function openPDFgenerateHandle (){
-    props.history.replace("/user/PDFgenerate");
-
+  function openPDFgenerateHandle() {
+    // props.history.replace("/user/PDFgenerate");
+  }
+  function openCustomListHandle(){
+    props.history.replace("/user/customlist");
   }
 
   useEffect(() => {
     if (props.AuthData.Auth.LoginKeyFlag === _loginKey_) {
-      console.log(props);
       props.history.replace("/home");
     } else {
-      console.log(props);
     }
-    // console.log(props);
-    // if (props.AuthData.Auth.LoginKey.length != "") {
-    //   // setFlag((loginFlag = true));
-    // } else {
-    //   console.log("ok");
-    //   // setFlag((loginFlag = false));
-    //   props.history.replace("/home");
-    // }
-    // // return () => {
-    // //   console.log(props);
-    // // };
+
   });
 
   return (
     props.AuthData.Auth.LoginKeyFlag && (
       <div className="">
-        {/* <Header/> */}
         <div className='container'>
-          {console.log(_loginKey_)}
           <Paper className={classes.root} onClick={openMonthStatus}>
             <Typography variant="p" component="p">
               Current Month Status
-            <img src={currentStatusIcon} />
+            <img src={currentStatusIcon} alt='pic'/>
             </Typography>
           </Paper>
           <Paper className={classes.root} onClick={openAddExpendature}>
             <Typography variant="p" component="p">
               Add Expensive
-            <img src={addexpendature} />
+            <img src={addexpendature} alt='pic' />
             </Typography>
           </Paper>
-          <Paper className={`${classes.root} disable`}>
-            <Typography variant="p" component="p">
-              Comparision
-            <img src={compaericon} />
-            </Typography>
-          </Paper>
+
           <Paper className={classes.root} onClick={openExpendatureDetailHandle}>
             <Typography variant="p" component="p">
               Expentature Details
-            <img src={expendaturedetails} />
+            <img src={expendaturedetails} alt='pic'/>
             </Typography>
           </Paper>
-          <Paper className={classes.root} onClick={openPDFgenerateHandle}>
+          <Paper className={`${classes.root} disable`} onClick={openPDFgenerateHandle}>
             <Typography variant="p" component="p">
               Generate Report
               <i className='fa fa-file-pdf' style={{
@@ -108,19 +85,35 @@ function UserHome(props) {
                 margin: '0px',
                 height: '20px',
               }} />
-              {/* <img src={expendaturedetails} /> */}
             </Typography>
           </Paper>
           <Paper className={classes.root} onClick={openSelectedMonthStatusHandle}>
             <Typography variant="p" component="p">
               Selected Month Status
-            <img src={selectmonth} />
+            <img src={selectmonth} alt='pic'/>
             </Typography>
           </Paper>
+
           <Paper className={classes.root} onClick={openSettingHandle}>
             <Typography variant="p" component="p">
               Setting
-            <img src={settingicon} />
+            <img src={settingicon} alt='pic' />
+            </Typography>
+          </Paper>
+          <Paper className={`${classes.root}`} onClick={openCustomListHandle}>
+            <Typography variant="p" component="p">
+              Custom List
+              <i className='fa fa-list-alt' style={{
+                float: 'right',
+                margin: '0px',
+                height: '20px',
+              }} />
+            </Typography>
+          </Paper>
+          <Paper className={`${classes.root} disable`}>
+            <Typography variant="p" component="p">
+              Comparision
+            <img src={compaericon} alt='pic'/>
             </Typography>
           </Paper>
         </div>
@@ -136,7 +129,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // login: data => dispatch(login(data))
   };
 };
 
